@@ -17,4 +17,9 @@ public class TheatreService {
 		return theatreRepository.findAll();
 	}
 
+	public void addTheatre() {
+		TheatreEntity t = new TheatreEntity(0,"City Pride", "Pune","Wakad");
+		theatreRepository.save(t);
+	}
+
 }
