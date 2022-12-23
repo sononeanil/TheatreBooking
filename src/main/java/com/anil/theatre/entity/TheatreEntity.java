@@ -16,7 +16,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-@Table(name = "Theatre")
+@Table(name = "THEATRE")
 public class TheatreEntity {
 	
 	@Id

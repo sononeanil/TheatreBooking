@@ -1,6 +1,6 @@
 spring:
     datasource:
-        url: jdbc:h2:file:E:/copyDaily/Project/Pblicis/theatreBooking
+        url: jdbc:h2:file:E:/copyDaily/Project/Pblicis/theatreBooking;DB_CLOSE_DELAY=-1
         username: sa
         password: 
         driverClassName: org.h2.Driver
@@ -13,6 +13,9 @@ spring:
                 web-allow-others: false
     jpa:
         database-platform: org.hibernate.dialect.H2Dialect
+        defer-datasource-initialization: true
+        hibernate:
+            ddl-auto: create
         
             
       
