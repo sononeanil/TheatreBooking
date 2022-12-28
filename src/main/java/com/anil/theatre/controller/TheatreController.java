@@ -28,7 +28,7 @@ public class TheatreController {
 		return theatreService.getTheatreList();
 	}
 	
-	@GetMapping("/theatre")
+	@GetMapping("/new")
 	public void addTheatre() {
 		theatreService.addTheatre();
 	}
