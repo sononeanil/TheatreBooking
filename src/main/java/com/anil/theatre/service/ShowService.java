@@ -14,12 +14,12 @@ public class ShowService {
 	ShowRepositoy showRepositoy;
 
 	public void addNewShow() {
-		ShowEntity showEntity = new ShowEntity(0,"1","Avtar","Pune",2,"Eng", null, "Action", null, null, null, null,null, null, null, null);
+		ShowEntity showEntity = new ShowEntity(0,"1","Avatar","Pune","Eng", null, "Action", null, null,null);
 		showRepositoy.save(showEntity);
 	}
 
-	public List<ShowEntity> getTheatreByShowName() {
-		return showRepositoy.findAll();
+	public List<ShowEntity> getTheatreByShowName(String showName) {
+		return showRepositoy.findAllByName(showName);
 	}
 	
 	

@@ -1,13 +1,13 @@
 package com.anil.theatre.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.anil.theatre.entity.ShowEntity;
+import com.anil.theatre.pojo.TheatreBookingResponse;
 import com.anil.theatre.service.ShowService;
 
 @RestController
@@ -23,8 +23,10 @@ public class ShowController {
 	}
 	
 	@GetMapping("/browsetheatre/byshowname")
-	public List<ShowEntity> getTheatreByShowName() {
-		return showService.getTheatreByShowName();
+	public ResponseEntity<TheatreBookingResponse> getTheatreByShowName() {
+		TheatreBookingResponse theatreBookingResponse = new TheatreBookingResponse();
+		theatreBookingResponse.getHmTheatreBookingResponse().put("listOfTheatres", showService.getTheatreByShowName("Avatar"));
+		return new ResponseEntity<TheatreBookingResponse>(theatreBookingResponse, HttpStatus.OK);
 	}
 	
 	@GetMapping("/browsetheatre/bycity")
