@@ -21,7 +21,7 @@ public class TheatreEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private long theatreId;
 	private String name;
 	private String address;
 	private String city;
