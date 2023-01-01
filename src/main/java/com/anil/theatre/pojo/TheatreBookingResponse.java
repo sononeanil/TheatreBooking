@@ -16,7 +16,7 @@ import lombok.Setter;
 @Setter
 public class TheatreBookingResponse {
 	
-	Map<String, Object> hmTheatreBookingResponse = new HashMap<String, Object>(1,2);
+	Map<String, Object> theatreBookingResponse = new HashMap<String, Object>(1,2);
 	HttpStatus httpStatus;
 	
 }

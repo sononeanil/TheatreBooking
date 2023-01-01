@@ -1,5 +1,6 @@
 package com.anil.theatre.entity;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -11,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -36,17 +39,17 @@ public class ScreenEntity {
 	 * @JoinColumn(name="theatreId", referencedColumnName = "theatreId") private
 	 * TheatreEntity theatreEntity;
 	 */
-	@Column(nullable = false)
+	@NotNull(message = "Theatre id can not be blank or NULL")
 	private long theatreId;
-	@Column(nullable = false)
+	@NotBlank(message = "Screen id can not be blank or NULL111111")
 	private String screenId;
-	@Column(nullable = false)
+	@NotBlank(message = "Movie Name can not be blank or NULL")
 	private String movieName;
-	@Column(nullable = false)
-	private Date startDate;
-	@Column(nullable = false)
-	private Date endDate;
-	@Column(nullable = false)
+	@NotNull(message = "Start Date can not be blank or NULL")
+	private LocalDateTime startDate;
+	@NotNull(message = "End date can not be blank or NULL")
+	private LocalDateTime endDate;
+	@NotNull(message = "Ticket Amount can not be blank or NULL")
 	private float ticketAmount;
 	
 

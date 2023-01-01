@@ -25,7 +25,7 @@ public class ShowController {
 	@GetMapping("/browsetheatre/byshowname")
 	public ResponseEntity<TheatreBookingResponse> getTheatreByShowName() {
 		TheatreBookingResponse theatreBookingResponse = new TheatreBookingResponse();
-		theatreBookingResponse.getHmTheatreBookingResponse().put("listOfTheatres", showService.getTheatreByShowName("Avatar"));
+		theatreBookingResponse.getTheatreBookingResponse().put("listOfTheatres", showService.getTheatreByShowName("Avatar"));
 		return new ResponseEntity<TheatreBookingResponse>(theatreBookingResponse, HttpStatus.OK);
 	}
 	
