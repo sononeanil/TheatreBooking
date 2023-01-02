@@ -10,6 +10,7 @@ import javax.validation.ConstraintViolationException;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -19,6 +20,18 @@ import com.anil.theatre.util.TheatreBookingConstants;
 
 @RestControllerAdvice
 public class TheatreBookingExceptionController {
+	
+	@ExceptionHandler(value = HttpMessageNotReadableException.class)
+	public ResponseEntity<TheatreBookingResponse> handleHttpMessageNotReadableException(HttpMessageNotReadableException httpMessageNotReadableException) {
+		TheatreBookingResponse theatreBookingResponse = new TheatreBookingResponse();
+		theatreBookingResponse.getTheatreBookingResponse().put(TheatreBookingConstants.EXCEPTION_MESSAGE, httpMessageNotReadableException.getCause().toString());
+		theatreBookingResponse.getTheatreBookingResponse().put(TheatreBookingConstants.EXCEPTION_MESSAGE + "a", httpMessageNotReadableException.getLocalizedMessage());
+		theatreBookingResponse.getTheatreBookingResponse().put(TheatreBookingConstants.EXCEPTION_MESSAGE + "b", httpMessageNotReadableException.getMostSpecificCause().toString());
+		theatreBookingResponse.setHttpStatus(HttpStatus.BAD_REQUEST);
+		
+		return new ResponseEntity<>(theatreBookingResponse, HttpStatus.BAD_REQUEST);
+	}
+
 	
 	@ExceptionHandler(value = InvalidTheatreIdException.class)
 	public ResponseEntity<TheatreBookingResponse> exception(InvalidTheatreIdException invalidTheatreIdException){

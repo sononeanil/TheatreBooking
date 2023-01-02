@@ -1,17 +1,13 @@
 package com.anil.theatre.entity;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -25,7 +21,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-@Table(name = "Screen")
+@Table(name = "SCREEN", uniqueConstraints = {@UniqueConstraint(columnNames = {"theatreId","screenId","startDate","endDate"})})
 public class ScreenEntity {
 	
 	@Id
@@ -41,7 +37,7 @@ public class ScreenEntity {
 	 */
 	@NotNull(message = "Theatre id can not be blank or NULL")
 	private long theatreId;
-	@NotBlank(message = "Screen id can not be blank or NULL111111")
+	@NotNull(message = "Screen id can not be blank or NULL")
 	private String screenId;
 	@NotBlank(message = "Movie Name can not be blank or NULL")
 	private String movieName;
