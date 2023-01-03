@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,9 +33,18 @@ public class TheatreController {
 		 return new ResponseEntity<TheatreBookingResponse>(theatreService.getTheatreList(), HttpStatus.OK) ;
 	}
 	
-	@GetMapping("/new")
+	@PostMapping("/new")
 	public ResponseEntity<TheatreBookingResponse> addTheatre(@RequestBody @Valid TheatreEntity theatreEntity) {
 		return new ResponseEntity<>(theatreService.addTheatre(theatreEntity), HttpStatus.CREATED);
+	}
+	
+	@GetMapping("/browseTheatreByMovieName")
+	public ResponseEntity<TheatreBookingResponse> browseTheatreByMovieName(String movieName){
+		try {
+			return new ResponseEntity<TheatreBookingResponse> (theatreService.browseTheatreByMovieName(), HttpStatus.OK);
+		}catch(Exception exception) {
+			throw exception;
+		}
 	}
 
 }

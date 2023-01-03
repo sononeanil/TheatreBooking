@@ -4,6 +4,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +21,7 @@ import com.anil.theatre.entity.ScreenEntity;
 import com.anil.theatre.entity.TheatreEntity;
 import com.anil.theatre.exception.InvalidTheatreIdException;
 import com.anil.theatre.exception.TheatreBookingInvalidInputException;
+import com.anil.theatre.pojo.SearchResult;
 import com.anil.theatre.pojo.TheatreBookingResponse;
 import com.anil.theatre.repository.ScreenRepository;
 import com.anil.theatre.repository.TheatreRepository;
@@ -27,6 +34,9 @@ public class ScreenService {
 	
 	@Autowired
 	TheatreRepository theatreRepository;
+	
+	@PersistenceContext
+	private EntityManager entityManager;
 
 	public TheatreBookingResponse enrollNewScreen(ScreenEntity screenEntity) throws ParseException {
 		TheatreBookingResponse theatreBookingResponse = new TheatreBookingResponse();
@@ -43,6 +53,24 @@ public class ScreenService {
 			throw new TheatreBookingInvalidInputException(e, "TheatreId, ScreenId, Start Date and End Date attribute must be unique. Screen with this details already exists with id " + key,HttpStatus.CONFLICT);
 		}
 		 return theatreBookingResponse;
+	}
+	
+	public void browseByCriteria() {
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<SearchResult> criteriaQuery = criteriaBuilder.createQuery(SearchResult.class);
+		Root<SearchResult> searchResultRoot = criteriaQuery.from(SearchResult.class);
+//		Predicate predicate = criteriaBuilder.and()
+	}
+
+	public TheatreBookingResponse browseTheatreByMovieName() {
+		try {
+			TheatreBookingResponse theatreBookingResponse = new TheatreBookingResponse();
+//			theatreBookingResponse.getTheatreBookingResponse().put("searchResult", screenRepository.);
+			return null;
+		}catch(Exception e) {
+			throw e;
+		}
+		
 	}
 	
 	

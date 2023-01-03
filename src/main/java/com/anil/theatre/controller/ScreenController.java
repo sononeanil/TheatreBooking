@@ -25,21 +25,29 @@ public class ScreenController {
 	ScreenService screenService;
 	
 	@GetMapping("/enroll")
-	public ResponseEntity<TheatreBookingResponse> enrollScreen(@RequestBody @Valid ScreenEntity screenEntity) throws InvalidTheatreIdException {
+	public ResponseEntity<TheatreBookingResponse> enrollScreen(@RequestBody @Valid ScreenEntity screenEntity) throws InvalidTheatreIdException, ParseException {
 		try {
 			System.out.println("6a6a6a6a6a6a6a6a6");
 			return new ResponseEntity<>(screenService.enrollNewScreen(screenEntity), HttpStatus.CREATED);
 		} catch (ParseException e) {
 			System.out.println("555555555555555555555");
 			e.printStackTrace(); 
+			throw e;
 		}catch (Exception e) {
 			System.out.println("666666666666666666666 " + e.getLocalizedMessage());
-			e.printStackTrace(); 
+//			e.printStackTrace(); 
 			throw e;
 		}
-		TheatreBookingResponse s = new TheatreBookingResponse();
-		s.getTheatreBookingResponse().put("myException", "myEx");
-		return new ResponseEntity<TheatreBookingResponse>(s,HttpStatus.BAD_REQUEST);
+	}
+	
+	@GetMapping("browseTheatreByMovieName")
+	public ResponseEntity<TheatreBookingResponse> browseTheatreByMovieName(){
+		TheatreBookingResponse theatreBookingResponse;
+		try {
+			return new ResponseEntity<TheatreBookingResponse>(screenService.browseTheatreByMovieName(), HttpStatus.OK);
+		}catch(Exception exception) {
+			throw exception;
+		}
 	}
 
 }
